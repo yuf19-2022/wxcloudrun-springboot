@@ -8,10 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.Optional;
@@ -35,10 +32,11 @@ public class ResponseController {
    * @return API response json
    */
   @GetMapping(value = "/api/response")
-  ApiResponse get() {
-    logger.info("/api/response get request");
+  ApiResponse get(@RequestParam Map<String,Object> request) {
+    JSONObject jsonObject=new JSONObject(request);
+    logger.info("/api/response get request: "+jsonObject);
 
-    return ApiResponse.ok(0);
+    return ApiResponse.ok(jsonObject.toString());
   }
 
 
@@ -49,9 +47,10 @@ public class ResponseController {
    */
   @PostMapping(value = "/api/response")
   ApiResponse create(@RequestBody Map<String,Object> request) {
-    logger.info("/api/response post request: {}", new JSONObject(request));
+    JSONObject jsonObject=new JSONObject(request);
+    logger.info("/api/response post request: {}", jsonObject);
 
-    return ApiResponse.ok(0);
+    return ApiResponse.ok(jsonObject.toString());
   }
   
 }
