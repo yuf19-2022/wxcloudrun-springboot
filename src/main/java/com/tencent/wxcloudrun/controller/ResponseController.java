@@ -31,6 +31,18 @@ public class ResponseController {
 
 
   /**
+   * 接收微信服务器的响应，测试添加get请求
+   * @return API response json
+   */
+  @GetMapping(value = "/api/response")
+  ApiResponse get() {
+    logger.info("/api/response get request");
+
+    return ApiResponse.ok(0);
+  }
+
+
+  /**
    * 接收微信服务器的响应
    * @param request {@link Map}
    * @return API response json
